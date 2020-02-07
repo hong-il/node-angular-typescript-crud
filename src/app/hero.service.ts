@@ -22,6 +22,7 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
+        tap(_=> this.log('fetched heroes')),
         catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
@@ -29,6 +30,7 @@ export class HeroService {
   getHero(id: number): Observable<Hero> {
     return this.http.get<Hero>(this.heroesUrl + '/' + id)
       .pipe(
+        tap(_=> this.log('fetched hero id=' + id)),
         catchError(this.handleError<Hero>('getHero'))
       );
   }
